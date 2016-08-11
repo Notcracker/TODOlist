@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="taskApp" ng-controller="taskController">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head 
+         content must come *after* these tags -->
+    
+    <title>Ristorante Con Fusion</title>    
+        <!-- Bootstrap -->
+<!-- build:css styles/main.css -->
+    <link href="../bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+    <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="styles/bootstrap-social.css" rel="stylesheet">
+<!-- endbuild -->
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+    
+<body>
+
+<div class='container-fluid'>
+    <div class='jumbotron'>
+        <h1>TODOlist</h1>
+    </div>
+</div>
+<div class="container">
+    <div class="row row-content">
+        <!--    <div class="col-xs-12" ng-if="!showMenu">
+                <h3>{{message}}</h3>
+            </div>
+            <div class="col-xs-12" ng-if="showMenu">-->
+            
+                    <ul class='nav nav-tabs' role='tablist'>
+                        <li role='presentation' ng-class='{active:isSelected(1)}'>
+                            <a ng-click='select(1)'  arie-controls="all menu" role='tab'>All Tasks</a>
+                        </li>
+                        <li role='presentation' ng-class='{active:isSelected(2)}'>
+                            <a ng-click='select(2)'  aria-controls="appetizers">Completed</a>
+                        </li>
+                        <li role='presentation' ng-class='{active:isSelected(3)}'>
+                            <a ng-click='select(3)'  aria-controls="mains" role='tab'>Active</a>
+                        </li>
+                    </ul>
+                <div class='tab-content'>
+                  <ul class='media-list tab-pane fade in active'>
+                    <li class="media" ng-repeat="task in tasklist | filter:filtText">
+                        <hr>
+                        <div class="media-body">
+                            <h2 class="media-heading">
+                            <span class="label label-info">{{task.taskStatus}}</span></h2>
+                            <p>{{task.taskBody}}</p>
+                            <button class='btn' ng-click='deleteTask(task._id)' >Delete task</button>
+                        </div>
+                    </li>
+                  </ul>  
+                </div>    
+            
+        </div>
+    </div>
+<hr>
+<div class="col-xs-12 col-sm-9">
+    <form class="form-horizontal" ng-submit="sendQuery()" name="someForm" novalidate>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Task text</label>
+            <div class="col-sm-10">
+                <textarea class="form-control" ng-minlength="1" ng-required="true" rows="12" name="someName" ng-model="task.text"></textarea>
+            </div>
+        </div> 
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" ng-disabled="someForm.$invalid" class="btn btn-primary">Set task</button>
+            </div>
+        </div>
+        
+    </form>
+</div>
+
+
+
+    
+
+<!-- build:js scripts/main.js -->
+    <script src="../bower_components/angular/angular.min.js"></script>
+    <script src="../bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.min.js"></script>
+    <!--<script src="scripts/app.js"></script>-->
+    <script src="scripts/controllers.js"></script>
+    <script src="scripts/services.js"></script>
+<!-- endbuild -->
+
+</body>
+
+</html>
