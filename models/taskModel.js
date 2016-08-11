@@ -8,7 +8,7 @@ var taskSchema = new Schema({
 		required: true
 	},
 	taskStatus:{
-		type: Boolean,
+		type: String,
 		required: true
 	}
 });

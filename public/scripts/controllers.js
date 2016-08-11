@@ -2,24 +2,41 @@ angular.module('taskApp', ['ui.router','ngResource'])
 
 
     .controller('taskController', ['$scope', 'taskFactory', function($scope, taskFactory) {
-
+        $scope.search = '';
+        $scope.task = {'text':''};
+        $scope.tasklist;
+        
 
         var host = window.location.hostname;
-        $scope.tasklist;
+
+
+        
         taskFactory.getTaskList(host).query(
                 function(response) {
                     $scope.tasklist = response;
                    
         });
 
-        $scope.task = {'text':''};
-
+        $scope.filterTasks = function(){
+            taskFactory.getTaskList(host).query(
+                function(response) {
+                    $scope.tasklist = response;
+                    $scope.superArray = [];
+                    for (var j=0; j<$scope.tasklist.length; j++) {
+                        if ($scope.tasklist[j].taskBody.match($scope.search)) {
+                            $scope.superArray.push($scope.tasklist[j]);
+                        };
+                    }
+                    $scope.tasklist = $scope.superArray;
+            });
+            
+            
+        }
 
         $scope.sendQuery = function(){
             
             taskFactory.query1(host).post($scope.task,function(data){
                 $scope.tasklist.push(data);
-                console.log($scope.tasklist);
                 $scope.task = '';
                 
             });
@@ -51,7 +68,26 @@ angular.module('taskApp', ['ui.router','ngResource'])
 
 
         $scope.deleteTask = function (id){
-            console.log(id);
+            
+            taskFactory.delTask(host).delete({id:id},function (data) {
+                taskFactory.getTaskList(host).query(
+                function(response) {
+                    $scope.tasklist = response;
+                   
+                });
+            })
+        };
+
+        $scope.changeStatus = function (id) {
+            
+            taskFactory.changeTaskStatus(host).update({id:id},function (data) {
+                taskFactory.getTaskList(host).query(
+                function(response) {
+                    $scope.tasklist = response;
+                   
+                });                 
+                
+            });
         }
         
           

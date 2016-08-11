@@ -1,17 +1,26 @@
 angular.module('taskApp')
         .factory('taskFactory', ['$resource', function($resource) {
-            var searchfac = {};
+            var taskfac = {};
 
             // make query
-            searchfac.query1 = function (host) {
+            taskfac.query1 = function (host) {
                 
                 return $resource('http://'+host+':3000', null, {'post':{method:'POST'}});
                 
             };
 
-            searchfac.getTaskList = function (host) {
-                return $resource('http://'+host+':3000'+'/tasks', null, {'get':{mathod:'GET'}});
+            taskfac.getTaskList = function (host) {
+                return $resource('http://'+host+':3000'+'/tasks', null, {'get':{method:'GET'}});
             }
 
-            return searchfac;
+            taskfac.delTask = function (host){
+                
+                return $resource('http://'+host+':3000'+'/tasks/:id', null, {'delete':{method:'DELETE'}});
+            }
+
+           
+            taskfac.changeTaskStatus = function (host) {
+                return $resource('http://'+host+':3000'+'/tasks', null,  {'update':{method:'PUT'}});
+            };
+            return taskfac;
         }])
