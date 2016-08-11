@@ -1,6 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-
+var path = require('path');
 var	assert = require('assert');
 
 var task = express.Router();
@@ -10,7 +10,7 @@ task.use(bodyParser.json());
 task.route('/')
 .get(function (req,res,next){
 	console.log('nice, you, fool!');
-	res.sendFile('/home/miri/tasks/public/index.html')
+	res.sendFile(path.join(__dirname, '../public/index.html'));
 })
 .post(function(req,res,next){
 	
